@@ -1,0 +1,101 @@
+﻿@model NotataSub.Models.Book
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<style>
+    .delete-page {
+        display: unset;
+    }
+</style>
+
+@section DeletePage
+{
+
+
+
+<table class="table">
+    <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Title)
+            </td>
+
+        </tr>
+        <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.Pages)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Pages)
+            </td>
+
+        </tr>
+         <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Price)
+            </td>
+
+        </tr>
+         <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Year)
+            </td>
+
+        </tr>
+         <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.CatId)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Cat.Name)
+            </td>
+
+        </tr>
+         <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.WriterName)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.WriterName)
+            </td>
+            </tr>
+            <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.OtherWriter)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.OtherWriter)
+            </td>
+            </tr>
+            
+
+        </tr>
+        
+    </table>
+    
+        
+    <div class="mt-2 mr-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-outline-danger" />
+            <i class="far fa-trash-alt"></i>
+            حذف
+        </form>
+    </div>     
+    }    
+        
+        
+       
+    
+   

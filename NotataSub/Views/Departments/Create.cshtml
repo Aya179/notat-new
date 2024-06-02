@@ -1,0 +1,41 @@
+﻿@model NotataSub.Models.Department
+@{ ViewData["Title"] = "Create"; }
+
+<style>
+    .create-page {
+        display: unset;
+    }
+</style>
+
+@section CreatePage
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="UniversityId" class="control-label"></label>
+            <select asp-for="UniversityId" class="form-control" asp-items="ViewBag.UniversityId"></select>
+        </div>
+       
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="FacultyId" class="control-label"></label>
+            <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
+        </div>
+        
+    </div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="DepartmentName" class="control-label"></label>
+            <input asp-for="DepartmentName" class="form-control" />
+            <span asp-validation-for="DepartmentName" class="text-danger"></span>
+        </div>
+        </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

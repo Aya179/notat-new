@@ -1,0 +1,145 @@
+﻿
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                    مبيعات الكاتب
+                    <i class="fas fa-university"></i>
+
+                </h3>
+                <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+            </div>
+            <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+            <div class="col">
+            <div class="form-group"><br />
+                <label class="control-label" style="text-align:center;">الكاتب</label>
+                <select class="form-control" asp-items="ViewBag.WritreId" id="auther" onchange="Search()">
+                    <option value="0"> الرجاء اختيار الكاتب</option>
+                </select>
+            </div>
+            </div>
+            </div>
+            @*<button class="btn btn-primary btn-lg btn-block" type="submit" style="width: 50px;" onclick="Search()">
+                                            <i class="fa fa-search" ></i>
+                            </button>*@
+
+            <div class="card-body">
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped" id="department_table">
+                        <thead>
+                            <tr>
+                               <th> عنوان الكتاب</th>
+                               <th> اسم المؤلف</th>
+                               <th> إجمالي مبيعات الكاتب حسب الكتاب</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="Tableid">
+           
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        function Search() {
+
+
+            var BId = document.getElementById('auther').value;
+
+            $.get("/Reports/AutherReport", { id: BId }, function (data) {
+
+                var table_tr = "";
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                     <tr>
+                                                     <td style="text-align: center;"> `+ data[i].booktitle + ` </td>
+                                                                              <td style="text-align: center;"> `+ data[i].auther + `  </td>
+                                                                              <td style="text-align: center;"> `+ data[i].total + ` </td>
+                                                                              
+
+
+
+
+
+
+
+
+                                       </tr>`;
+
+                }
+
+
+
+
+                document.getElementById('Tableid').innerHTML = table_tr;
+
+                //$(function () {
+                //    $('#department_table').DataTable({
+                //        "lengthMenu": [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "All"]],
+                //        "responsive": true,
+                //        "language": {
+                //            "sProcessing": "جارٍ التحميل...",
+                //            "sLengthMenu": "أظهر _MENU_ مدخلات",
+                //            "sZeroRecords": "لم يتم العثور على أية نتائج",
+                //            "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                //            "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                //            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                //            "sInfoPostFix": "",
+                //            "sSearch": "البحث:",
+                //            "sUrl": "",
+                //            "oPaginate": {
+                //                "sFirst": "الأول",
+                //                "sPrevious": "السابق",
+                //                "sNext": "التالي",
+                //                "sLast": "الأخير"
+                //            }
+                //        }
+                //    });
+                //});
+            });
+
+        }
+
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('department_table');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'Report.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+       
+        
+                    
+                    </script>
+}

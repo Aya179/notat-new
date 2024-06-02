@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<div>
+    <form asp-action="GenerateQR" asp-controller="Cobons">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card card-primary border-0">
+                    <div class="card-header">
+                        <h3 class="card-title">QRCode</h3>
+
+
+                        <div class="d-inline">
+                            <a asp-action="Index"><i class="fa fa-arrow-left fa-lg"></i> </a>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row ">
+
+                            <div class="form-group">
+                                <label class="control-label">رقم الكوبون:</label>
+                                <input name="code" class="form-control" type="text" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fa fa-plus"></i>
+                            إنشاءQRCode
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

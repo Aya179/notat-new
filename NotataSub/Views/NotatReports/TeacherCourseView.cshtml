@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                    كورسات الأستاذ
+                    <i class="fas fa-university"></i>
+
+                </h3>
+                <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+            </div>
+            <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+                <div class="col">
+                    <div class="form-group">
+                        <br />
+                        <label class="control-label" style="text-align:center;">الأستاذ</label>
+                        <select class="form-control" asp-items="ViewBag.teacher" id="auther" onchange="Search()">
+                            <option value="0"> الرجاء اختيار الأستاذ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="card-body">
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped" id="department_table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;"> اسم الأستاذ</th>
+                                <th style="text-align:center;"> الكورس</th>
+                                
+                                <th style="text-align:center;">الكلية</th>
+                                <th style="text-align:center;">القسم</th>
+                                <th style="text-align:center;"> سعر الكورس</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="Tableid">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        function Search() {
+
+
+            var BId = document.getElementById('auther').value;
+
+            $.get("/NotatReports/TeacherCourse", { name: BId }, function (data) {
+                console.log(data);
+                var table_tr = "";
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                             <tr>
+                                                                     <td style="text-align: center;"> `+ data[i].teacher + ` </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].courseName + `  </td>
+                                                                                              <td style="text-align: center;"> `+ data[i].faculty.name + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data[i].department.departmentName + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data[i].price + ` </td>
+
+
+
+
+
+
+
+
+
+                                               </tr>`;
+
+                }
+
+
+
+
+                document.getElementById('Tableid').innerHTML = table_tr;
+
+               
+            });
+
+        }
+
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('department_table');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'Report.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+
+
+
+    </script>
+}

@@ -1,0 +1,78 @@
+﻿@model NotataSub.Models.Course
+
+
+@{ ViewData["Title"] = "Create"; }
+
+<style>
+    .create-page {
+        display: unset;
+    }
+</style>
+
+@section CreatePage
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="CourseName" class="control-label"></label>
+            <input asp-for="CourseName" class="form-control" />
+            <span asp-validation-for="CourseName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Teacher" class="control-label"></label>
+            <input asp-for="Teacher" class="form-control" />
+            <span asp-validation-for="Teacher" class="text-danger"></span>
+        </div>
+
+
+    </div>
+
+    <div class="col-5">
+
+
+        <div class="form-group">
+            <label asp-for="FacultyId" class="control-label"></label>
+            <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
+        </div>
+    </div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="DepartmentId" class="control-label"></label>
+            <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Semester" class="control-label"></label>
+            <input asp-for="Semester" class="form-control" />
+            <span asp-validation-for="Semester" class="text-danger"></span>
+        </div>
+
+    </div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="Year" class="control-label"></label>
+            <input asp-for="Year" class="form-control" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,176 @@
+﻿@model NotataSub.ViewModels.BookCreate
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.min.css" />
+
+<style>
+    .create-page {
+        display: unset;
+    }
+</style>
+@section CreatePage
+{
+    <form enctype="multipart/form-data" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="CatId" class="control-label">فئة الكتاب</label>
+                <select asp-for="CatId" class="form-control" asp-items="ViewBag.CatId" id="sub" onchange="getsub()"></select>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="subId" class="control-label">فئة الكتاب الفرعية</label>
+                <select asp-for="subId" class="form-control" asp-items="ViewBag.subId" id="subList"></select>
+            </div>
+        </div>
+       
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="WriterName" class="control-label">اسم المؤلف</label>
+                <input asp-for="WriterName" class="form-control" />
+                <span asp-validation-for="WriterName" class="text-danger"></span>
+
+            </div>
+        </div>
+     
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">عنوان الكتاب</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group ">
+                <label asp-for="Image" class="control-label"> @Html.DisplayNameFor(model => model.Image)</label>
+                <input asp-for="Image" class="form-control" type="file" name="Image" id="Image" multiple="multiple" />
+
+
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="Pages" class="control-label">عدد الصفحات</label>
+                <input asp-for="Pages" class="form-control" />
+                <span asp-validation-for="Pages" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">سعر الكتاب</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="Year" class="control-label">سنة النشر</label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="BookFile" class="control-label"> @Html.DisplayNameFor(model => model.BookFile)</label>
+                <input required type="file" accept=".rar , .zip" asp-for="BookFile" placeholder="File RAR or ZIP" class="form-control" />
+                <span asp-validation-for="BookFile" class="text-danger"></span>
+            </div>
+       </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="BookDescreption" class="control-label"> @Html.DisplayNameFor(model => model.BookDescreption)</label>
+                <input  type="file" accept=".rar , .zip" asp-for="BookDescreption" placeholder="File RAR or ZIP" class="form-control" />
+               @* <span asp-validation-for="BookDescreption" class="text-danger"></span>*@            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="OtherWriter" class="control-label">لمحة عن الكتاب</label>
+                <textarea asp-for="OtherWriter" class="form-control" rows="20">  </textarea>
+                <span asp-validation-for="OtherWriter" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-5">
+            <div class="form-group">
+               
+                <input type="radio"  @*class="form-control"*@ id="free" name="free" value="free" />
+                <label>كتاب مجاني</label>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+               
+            </div>
+        </div>
+        </form>
+      
+}
+
+@section Scripts {
+    <!--sweetalert-->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.js" integrity="sha512-813LH2NdwwzXnVfsmzSuAyyit5bRFdh997hN9Vzm0cdx3LdZV7TZNNb2Ag0dgJPD3J1Xn1Alg2YW70id+RtLrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if (ViewBag.Message != null)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script type="text/javascript">
+            window.onload = function () {
+
+                Swal.fire(
+
+                    'تمت إضافة الكتاب بنجاح'
+                )
+           
+
+                };
+
+        </script>
+    }
+    <script>
+        function getsub() {
+
+
+
+            var depID = document.getElementById('sub').value;
+            $(".chzn-select").chosen("destroy");
+            $.get("/Books/SubCatogary", { id: depID }, function (data) {
+                console.log(data);
+                //
+                var select = document.getElementById("subList");
+
+
+                // select.innerHTML = "  <option>الرجاء اختيار التخصص</option>";
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var option = document.createElement("option");
+                    option.text = data[i].name;
+                    option.value = data[i].id;
+                    select.appendChild(option);
+
+
+
+                }
+                $(".chzn-select").chosen();
+
+            });
+
+        }
+
+    </script>
+       @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

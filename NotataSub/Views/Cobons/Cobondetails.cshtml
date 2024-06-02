@@ -1,0 +1,101 @@
+﻿@model IEnumerable<NotataSub.Models.Cobon>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-12">
+
+
+        <div class="card">
+
+            <div class="card-header">
+                
+               <div class="d-inline">
+       <a asp-action="Index"><i class="fa fa-arrow-left back-icon"></i></a>
+                      </div>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped" id="courses_table">
+                        <thead>
+                            <tr>
+
+                                <th style="text-align:center;">
+                                    @Html.DisplayNameFor(model => model.CobonValue)
+                                </th>
+                                <th style="text-align:center;">
+                                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                                </th>
+                                <th style="text-align:center;">
+                                    @Html.DisplayNameFor(model => model.CobonNumber)
+                                </th>
+
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.CobonValue)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.CobonNumber)
+                                    </td>
+                                   
+                                    <td>
+                                        <a asp-controller="Cobons" asp-action="GenerateQR" asp-route-code="@item.CobonNumber">QR</a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#courses_table').DataTable({
+                "lengthMenu": [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "All"]],
+                "responsive": true,
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يتم العثور على أية نتائج",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "البحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+            });
+        });</script>
+}
+

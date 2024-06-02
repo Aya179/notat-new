@@ -1,0 +1,90 @@
+﻿@model NotataSub.Models.Book
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<style>
+    .edit-page {
+        display: unset;
+    }
+</style>
+@section EditPage
+{
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="CatId" class="control-label">فئة الكتاب</label>
+            <select asp-for="CatId" class="form-control" asp-items="ViewBag.CatId" id="sub" onchange="getsub()"></select>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="subId" class="control-label">فئة الكتاب الفرعية</label>
+            <select asp-for="subId" class="form-control" asp-items="ViewBag.subId" id="subList"></select>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="WriterName" class="control-label">اسم المؤلف</label>
+            <input asp-for="WriterName" class="form-control" />
+            <span asp-validation-for="WriterName" class="text-danger"></span>
+
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Title" class="control-label">عنوان الكتاب</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group ">
+            <label asp-for="Image" class="control-label"> @Html.DisplayNameFor(model => model.Image)</label>
+            <input asp-for="Image" class="form-control" type="file" name="CancelImage" id="CancelImage" multiple="multiple" />
+
+
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Pages" class="control-label">عدد الصفحات</label>
+            <input asp-for="Pages" class="form-control" />
+            <span asp-validation-for="Pages" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Price" class="control-label">سعر الكتاب</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Year" class="control-label">سنة النشر</label>
+            <input asp-for="Year" class="form-control" />
+            <span asp-validation-for="Year" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label class="control-label"> نموذج مجاني عن الكتاب</label>
+            <input  type="file" accept=".rar , .zip" id="BookFile" name="BookFile" placeholder="File RAR or ZIP" class="form-control" />
+        </div>
+    </div>
+            }
+           @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,55 @@
+﻿@model NotataSub.Models.Cobon
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<style>
+    .edit-page {
+        display: unset;
+    }
+</style>
+
+
+        @section EditPage
+{
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CobonId" />
+             <div class="col-5">
+            <div class="form-group">
+                <label asp-for="CobonValue" class="control-label"></label>
+                <input asp-for="CobonValue" class="form-control" />
+                <span asp-validation-for="CobonValue" class="text-danger"></span>
+            </div>
+             </div >
+                  <div class="col-5">
+            <div class="form-group">
+                <label asp-for="CobonNumber" class="control-label"></label>
+                <input asp-for="CobonNumber" class="form-control" />
+                <span asp-validation-for="CobonNumber" class="text-danger"></span>
+            </div>
+            </div>
+
+            @*<div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsValid" /> @Html.DisplayNameFor(model => model.IsValid)
+                    </label>
+                </div>
+            </div>*@
+             <div class="col-5">
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            </div>
+           
+ }          
+
+
+
+                        @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                        }

@@ -1,0 +1,50 @@
+﻿@model NotataSub.Models.University
+
+@{ ViewData["Title"] = "Delete"; }
+
+<style>
+    .delete-page {
+        display: unset;
+    }
+</style>
+
+
+
+
+
+
+@section DeletePage
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UniversityName)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.UniversityName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.City)
+            </td>
+        </tr>
+       
+
+
+    </table>
+
+    <div class="mt-2 mr-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="UniversityId" />
+            <button type="submit" class="btn btn-outline-danger" />
+            <i class="far fa-trash-alt"></i>
+            حذف
+        </form>
+    </div>
+
+}

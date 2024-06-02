@@ -1,0 +1,81 @@
+﻿@model NotataSub.ViewModels.LectureCreate
+@{ ViewData["Title"] = "Edit"; }
+
+
+<style>
+    .edit-page {
+        display: unset;
+    }
+</style>
+
+@section EditPage
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="LectureId" />
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="LectureNum" class="control-label"></label>
+            <input asp-for="LectureNum" class="form-control" />
+            <span asp-validation-for="LectureNum" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="PublishDate" class="control-label"></label>
+            <input asp-for="PublishDate" class="form-control" />
+            <span asp-validation-for="PublishDate" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="CourseId" class="control-label"></label>
+            <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId"></select>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Pages" class="control-label"></label>
+            <input asp-for="Pages" class="form-control" />
+            <span asp-validation-for="Pages" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Yearid" class="control-label"></label>
+            <select asp-for="Yearid" class="form-control" asp-items="ViewBag.Yearid"></select>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="LectureFile" class="control-label"></label>
+            <input type="file" accept=".rar , .zip" asp-for="LectureFile" placeholder="File RAR or ZIP" class="form-control" />
+            <span asp-validation-for="LectureFile" class="text-danger"></span>
+        </div>
+    </div>
+
+}
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

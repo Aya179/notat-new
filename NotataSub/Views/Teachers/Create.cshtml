@@ -1,0 +1,50 @@
+﻿@model NotataSub.Models.Teacher
+
+
+@{ ViewData["Title"] = "Create"; }
+
+<style>
+    .create-page {
+        display: unset;
+    }
+</style>
+
+
+
+
+
+
+@section CreatePage
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5 mx-auto">
+        <div class="form-group">
+            <label asp-for="Photo" class="control-label"></label>
+            <input asp-for="Photo" type="file" class="form-control" />
+            <span asp-validation-for="Photo" class="text-danger"></span>
+        </div>
+        </div>
+}
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

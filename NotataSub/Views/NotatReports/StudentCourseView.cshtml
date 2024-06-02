@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                    كورسات الأستاذ
+                    <i class="fas fa-university"></i>
+
+                </h3>
+                <button type="button" onclick="generatePDF()" class="btn-sm btn-success pull-right">طباعة</button>
+
+            </div>
+            <div class="row mb-4" style=" width: 50vw;  margin: auto;">
+                <div class="col">
+                    <div class="form-group">
+                        <br />
+                        <label class="control-label" style="text-align:center;">الطالب</label>
+                        <select class="form-control" asp-items="ViewBag.Students" id="auther" onchange="Search()">
+                            <option value="0"> الرجاء اختيار الطالب</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+           
+
+            <div class="card-body">
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped" id="department_table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center;"> اسم الطالب</th>
+                                <th style="text-align:center;"> االكورس</th>
+                                <th style="text-align:center;"> الأستاذ</th>
+                                <th style="text-align:center;"> الفصل</th>
+                                <th style="text-align:center;"> السعر</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="Tableid">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+        function Search() {
+
+
+            var BId = document.getElementById('auther').value;
+
+            $.get("/NotatReports/StudentCourse", { id: BId }, function (data) {
+
+                var table_tr = "";
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                             <tr>
+                                                             <td style="text-align: center;"> `+ data[i].sudentname + ` </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].coursename + `  </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].courseTeacher + ` </td>
+                                                                                              <td style="text-align: center;"> `+ data[i].coursesemestere + ` </td>
+                                                                                      <td style="text-align: center;"> `+ data[i].courseprice + ` </td>
+
+
+
+
+
+
+
+
+
+                                               </tr>`;
+
+                }
+
+
+
+
+                document.getElementById('Tableid').innerHTML = table_tr;
+
+                //$(function () {
+                //    $('#department_table').DataTable({
+                //        "lengthMenu": [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "All"]],
+                //        "responsive": true,
+                //        "language": {
+                //            "sProcessing": "جارٍ التحميل...",
+                //            "sLengthMenu": "أظهر _MENU_ مدخلات",
+                //            "sZeroRecords": "لم يتم العثور على أية نتائج",
+                //            "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                //            "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                //            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                //            "sInfoPostFix": "",
+                //            "sSearch": "البحث:",
+                //            "sUrl": "",
+                //            "oPaginate": {
+                //                "sFirst": "الأول",
+                //                "sPrevious": "السابق",
+                //                "sNext": "التالي",
+                //                "sLast": "الأخير"
+                //            }
+                //        }
+                //    });
+                //});
+            });
+
+        }
+
+
+        function generatePDF() {
+
+            // Choose the element id which you want to export.
+            var element = document.getElementById('department_table');
+
+            var opt = {
+                margin: 0.5,
+                filename: 'Report.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 1 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape', precision: '12' }
+            };
+
+            // choose the element and pass it to html2pdf() function and call the save() on it to save as pdf.
+            html2pdf().set(opt).from(element).save();
+        }
+
+
+
+    </script>
+}

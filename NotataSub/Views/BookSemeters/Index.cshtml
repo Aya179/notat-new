@@ -1,0 +1,104 @@
+﻿@model IEnumerable<NotataSub.Models.BookSemeter>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-12">
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                    الفهارس
+                    <i class="fas fa-university"></i>
+
+                </h3>
+                <a class="float-left" asp-action="Create">
+                    <i class="fa fa-plus"></i>
+                    إنشاء فهرس
+
+                </a>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped" id="courses_table">
+
+
+                           <thead>
+        <tr>
+            <th>
+                                    @Html.DisplayNameFor(model => model.semeterTitel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pagenum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bookTitle)
+            </th>
+            <th></th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                                        @Html.DisplayFor(modelItem => item.semeterTitel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pagenum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bookTitle)
+            </td>
+            <td>
+                  <a asp-action="Semesterdatails" asp-route-title="@item.bookTitle">تفاصيل</a> 
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#courses_table').DataTable({
+                "lengthMenu": [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "All"]],
+                "responsive": true,
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يتم العثور على أية نتائج",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "البحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+            });
+        });</script>
+}

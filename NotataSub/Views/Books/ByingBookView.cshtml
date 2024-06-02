@@ -1,0 +1,122 @@
+﻿@model IEnumerable<NotataSub.Models.selectModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3 class="card-title">
+                   الكتب التي تم شراؤها
+                    <i class="fas fa-university"></i>
+
+                </h3>
+                
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped" id="courses_table">
+                        <thead>
+                            <tr>
+                               
+                                <th style="text-align:center;">
+                                    @Html.DisplayNameFor(model => model.Booktitle)
+                                </th>
+                                <th style="text-align:center;">
+                                    @Html.DisplayNameFor(model => model.clientName)
+                                </th>
+                                <th align="center">
+                                    @Html.DisplayNameFor(model => model.BuyingDate)
+                                </th>
+
+                                
+
+                               
+                            </tr>
+                        </thead>
+                        <tbody id="tableData">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script>
+
+        $(document).ready(function () {
+
+
+            $.get("/Books/ByingBook", function (data) {
+
+                var table_tr = ""
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    table_tr += `
+                                                                         <tr>
+                                                                                         <td style="text-align: center;"> `+ data[i].booktitle + ` </td>
+                                                                                                      <td style="text-align: center;"> `+ data[i].clientName + ` </td>
+
+                                                                                                                <td style="text-align: center;"> `+ data[i].buyingDate + ` </td>
+                                                                                                                                        
+
+
+
+                                                                           </tr>`;
+               
+
+
+                }
+               
+
+                document.getElementById('tableData').innerHTML = table_tr;
+
+  
+
+
+
+            });
+
+        });
+
+
+            
+       
+        $(function () {
+            $('#courses_table').DataTable({
+                "lengthMenu": [[5, 10, 15, 20, 25, -1], [5, 10, 15, 20, 25, "All"]],
+                "responsive": true,
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يتم العثور على أية نتائج",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "البحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+            });
+        });</script>
+}
+

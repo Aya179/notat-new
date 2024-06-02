@@ -1,0 +1,33 @@
+﻿@model NotataSub.Models.SubCatogary
+
+@{ ViewData["Title"] = "Create"; }
+
+<style>
+    .create-page {
+        display: unset;
+    }
+</style>
+
+@section CreatePage
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="CatogaryId" class="control-label"></label>
+            <select asp-for="CatogaryId" class="form-control"  asp-items="@ViewBag.CatogaryId"/>
+            <span asp-validation-for="CatogaryId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+
+    </div>
+
+    
+}

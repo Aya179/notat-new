@@ -1,0 +1,86 @@
+﻿@model NotataSub.Models.Client
+@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@{ ViewData["Title"] = "Delete"; }
+
+<style>
+    .delete-page {
+        display: unset;
+    }
+</style>
+
+
+
+
+
+
+@section DeletePage
+{
+
+    <table class="table">
+
+        <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.FirstName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.LastName)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Phone)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Image)
+            </td>
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Password)
+            </td>
+        </tr>
+        
+    </table>
+
+    <div class="mt-2 mr-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-outline-danger" />
+            <i class="far fa-trash-alt"></i>
+            حذف
+        </form>
+    </div>
+
+}

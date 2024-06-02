@@ -1,0 +1,37 @@
+﻿@model NotataSub.Models.Catogary
+@{ ViewData["Title"] = "Delete"; }
+
+@section DeletePage
+{
+
+    <table class="table">
+
+        <tr>
+            <th class="w-25">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Image)
+            </td>
+        </tr>
+        
+    </table>
+
+    <div class="mt-2 mr-4">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-outline-danger" />
+            <i class="far fa-trash-alt"></i>
+            حذف
+        </form>
+    </div>
+
+}

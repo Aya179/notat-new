@@ -1,0 +1,10 @@
+﻿@{
+    if (this.User.Identity.Name == "Notat123@gmail.com" || !this.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout1.cshtml";
+    }
+}

@@ -1,0 +1,47 @@
+﻿@model NotataSub.Models.Catogary
+
+@{ ViewData["Title"] = "Edit"; }
+
+
+<style>
+    .edit-page {
+        display: unset;
+    }
+</style>
+
+@section EditPage
+{
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id " class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-5">
+
+        <div class="form-group">
+            <label asp-for="Image" class="control-label"></label>
+            <input asp-for="Image" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+    </div>
+   
+
+}
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

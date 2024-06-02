@@ -1,0 +1,49 @@
+﻿@model NotataSub.Models.Writer
+@{
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+@{ ViewData["Title"] = "Create"; }
+
+<style>
+    .create-page {
+        display: unset;
+    }
+</style>
+
+@section CreatePage
+{
+    <form enctype="multipart/form-data" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-5">
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <label asp-for="Information" class="control-label"></label>
+                <input asp-for="Information" class="form-control" />
+                <span asp-validation-for="Information" class="text-danger"></span>
+            </div>
+
+
+        </div>
+
+        <div class="col-5">
+
+
+            <div class="form-group ">
+                <label asp-for="Image" class="control-label"> @Html.DisplayNameFor(model => model.Image)</label>
+                <input asp-for="Image" class="form-control" type="file" name="file1" id="file1" multiple="multiple" />
+
+
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+        </div>
+        </form>
+
+    }
